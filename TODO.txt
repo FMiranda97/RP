@@ -1,3 +1,0 @@
-Testar PCA, kruskal, lda (n_features)
-10 para cada?
-mahanabolis???
