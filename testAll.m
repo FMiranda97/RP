@@ -1,7 +1,11 @@
 function testAll(data)
     reductionFuncs = {@ldaReduceFeatures, @pcaReduceFeatures, @pcaReduceFeatures};
     classifierFuncs = {@fisherLDA, @EuclideanA, @MahalanobisA};
-    file = fopen("resultados.txt", 'a');
+    
+    if ~exist("tests", 'dir')
+        mkdir("tests")
+    end
+    file = fopen("tests\resultados.txt", 'a');
     n_runs = 25;
     
     %%choose data set

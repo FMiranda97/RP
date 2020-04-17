@@ -5,7 +5,7 @@ function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data
     average_error=zeros(n_runs,1);
     
     for i = 1:n_runs
-        [temp_model(i), error_rate] = EuclideanA(app, data, training, testing);
+        [temp_model(i), error_rate] = EuclideanA(data, training, testing);
         average_error(i) = error_rate;
     end
     
@@ -27,7 +27,7 @@ function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data
     %plotting
     app.UIAxes.cla
     
-    if ((data.X(1,:)==real(data.X(1,:))) & (data.X(2,:)==real(data.X(2,:))))
+    if ((size (data.X, 1)>1) &  (data.X(1,:)==real(data.X(1,:))) & (data.X(2,:)==real(data.X(2,:))))
         plot(app.UIAxes,data.X(1,(data.y==2)),data.X(2,(data.y==2)),'o');
         hold (app.UIAxes,'on')
         plot(app.UIAxes,data.X(1,(data.y~=2)),data.X(2,(data.y~=2)),'+');
