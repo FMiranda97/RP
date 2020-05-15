@@ -1,11 +1,11 @@
-function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data, n_runs, training, testing)
+function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data, n_runs, training, testing, n_classes)
     
     close all
     %%Euclidean MDC classifier
     average_error=zeros(n_runs,1);
     
     for i = 1:n_runs
-        [temp_model(i), error_rate] = EuclideanA(data, training, testing);
+        [temp_model(i), error_rate] = Euclidean(data, n_classes, training, testing);
         average_error(i) = error_rate;
     end
     

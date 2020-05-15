@@ -1,11 +1,11 @@
-function [mahalanobis_model, average_error, standard_dev] = appMahalanobisA (app, data, n_runs, training, testing)
+function [mahalanobis_model, average_error, standard_dev] = appMahalanobisA (app, data, n_runs, training, testing, n_classes)
 
     close all
     %%Mahalanobis MDC classifier
     average_error=zeros(n_runs,1);
 
     for i = 1:n_runs
-        [temp_model(i), error_rate] = MahalanobisA(data, training, testing);
+        [temp_model(i), error_rate] = Mahalanobis(data, n_classes, training, testing);
         average_error(i) = error_rate;
     end    
 
