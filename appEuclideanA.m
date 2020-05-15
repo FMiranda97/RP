@@ -16,8 +16,8 @@ function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data
     euclidean_model.b=temp_model(1).b;
     
     for i = 2:n_runs
-        euclidean_model.W=euclidean_model.W+temp_model(i).W;
-        euclidean_model.b=euclidean_model.b+temp_model(i).b;
+        euclidean_model.W=temp_model(i).W;
+        euclidean_model.b=temp_model(i).b;
     end
     
     euclidean_model.W=euclidean_model.W/n_runs;

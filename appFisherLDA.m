@@ -16,8 +16,8 @@ function [fisher_model, average_error, standard_dev] = appFisherLDA (app, data, 
     fisher_model.b=temp_model(1).b;
     
     for i = 2:n_runs
-        fisher_model.W=fisher_model.W+temp_model(i).W;
-        fisher_model.b=fisher_model.b+temp_model(i).b;
+        fisher_model.W=temp_model(i).W;
+        fisher_model.b=temp_model(i).b;
     end
     
     fisher_model.W=fisher_model.W/n_runs;
