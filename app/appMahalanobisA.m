@@ -18,9 +18,9 @@ function [mahalanobis_model, average_error, standard_dev] = appMahalanobisA (app
     mahalanobis_model.mu=temp_model(1).mu;
     
     for i = 2:n_runs
-        mahalanobis_model.W=temp_model(i).W;
-        mahalanobis_model.b=temp_model(i).b;
-        mahalanobis_model.mu=temp_model(i).mu;
+        mahalanobis_model.W=mahalanobis_model.W+temp_model(i).W;
+        mahalanobis_model.b=mahalanobis_model.b+temp_model(i).b;
+        mahalanobis_model.mu=mahalanobis_model.mu+temp_model(i).mu;
     end
     
     mahalanobis_model.W=mahalanobis_model.W/n_runs;
