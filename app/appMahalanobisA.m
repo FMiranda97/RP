@@ -60,4 +60,3 @@ function [mahalanobis_model, average_error, standard_dev] = appMahalanobisA (app
         text(app.UIAxes,2,6,sprintf('Decision hyperplane ==> g1(x)=g2(x) ==> PRT10=%.2fN+%.2f',-dif_mu(1)/dif_mu(2),mahalanobis_model.b), 'fontsize',10,'fontweight','bold');
         axis(app.UIAxes,[min(data.X(1,:)) max(data.X(1,:)) min(data.X(2,:)) max(data.X(2,:))]);
     end
-end

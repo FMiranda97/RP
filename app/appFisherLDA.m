@@ -46,4 +46,3 @@ function [fisher_model, average_error, standard_dev] = appFisherLDA (app, data, 
 
         axis(app.UIAxes,[min(data.X(1,:)) max(data.X(1,:)) min(data.X(2,:)) max(data.X(2,:))]);
     end
-end
