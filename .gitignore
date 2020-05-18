@@ -2,3 +2,4 @@
 classifiers/euclidean_modelA.mat
 classifiers/fisher_modelA.mat
 classifiers/mahalanobis_modelA.mat
+*.asv
