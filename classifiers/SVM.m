@@ -1,6 +1,6 @@
 function [models, error_rate] = SVM (data, n_classes, training, testing, n_runs)
     %% SVM parameter tuning
-    c_pot = [-5:2];
+    c_pot = [-2:1];
     C=2.^c_pot;
 
     %% Model evaluation

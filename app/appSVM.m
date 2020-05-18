@@ -1,6 +1,8 @@
 function [svm_model, average_error, standard_dev] = appSVM (app, data, n_runs, training, testing, n_classes)
-    %% SVM parameter tuning
-    c_pot = [-25:10];
+    close all
+
+%% SVM parameter tuning
+    c_pot = [-2:1];
     C=2.^c_pot;
 
     %% Model evaluation
@@ -14,8 +16,10 @@ function [svm_model, average_error, standard_dev] = appSVM (app, data, n_runs, t
         average_err = error_rate;
         standard_dev = zeros(1,numel(error_rate));
     end
-
-%     app.UIAxes.cla;
+    
+    %plotting 
+    app.UIAxes.cla
+    
 %     plot(c_pot, average_err, 'o');
 %     ylabel('Testing Error (%)');
 %     set(gca, 'xtick', c_pot);
