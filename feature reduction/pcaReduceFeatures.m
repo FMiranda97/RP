@@ -1,4 +1,4 @@
-function [newData] = pcaReduceFeatures(dataScaled, variance)
+function [newData, model] = pcaReduceFeatures(dataScaled, variance)
     % get sorted eigenvalues that make for 95% of the variance
     if variance > 1
         variance = min([variance size(dataScaled.X,1)]);

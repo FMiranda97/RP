@@ -17,7 +17,7 @@ function [kmeans_model, error_rate] = KMeans(data, nClass, training, testing)
     data_te.name = 'Testing set';
 
     % load training data and setup 8-NN rule
-    kmeans_model = knnrule(data_tr,nClass);
+    kmeans_model = knnrule(data_tr, nClass);
     
     % evaluate classifier
     ypred = knnclass(data_te.X,kmeans_model);

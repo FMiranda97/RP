@@ -1,4 +1,4 @@
-function [newData] = ldaReduceFeatures(dataScaled, n)
+function [newData, model] = ldaReduceFeatures(dataScaled, n)
     n = min([n size(dataScaled.X,1)]);
     %% reduce to n features
     model = lda(dataScaled, n);

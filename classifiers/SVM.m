@@ -28,7 +28,7 @@ function [models, error_rate] = SVM (data, n_classes, training, testing, n_runs)
         for co=1:numel(C)
             fprintf("======\nrun=%d\nCost=%f\n======\n",n,C(co));
             disp("Let's train");
-            model = oaosvm(data_tr, struct('solver','smo','ker', 'linear','C',C(co)));
+            model = oaasvm(data_tr, struct('solver','smo','ker', 'linear','C',C(co)));
             ypred = svmclass(data_te.X, model);
             error_rate(n, co) = cerror(ypred, data_te.y)*100;
             models{n, co} = model;
