@@ -7,8 +7,13 @@ function [avg_error, std_error] = multiModelClassifier(data, models, checks)
         X = data.X(models{i}.indices, :);
         %%linha abaixo funciona para os classificadores da meta1, como
         %%fazer para os novos classificadores?
-        % if models{i}.name == "bayes_model"
-        ypred(i,:) = linclass(X,models{i});
+        if models{i}.name == "bayes_model"
+            ypred(i,:) = bayescls(X,models{i});
+        elseif models{i}.name == "svm_model"
+            ypred(i,:) = svmclass(X,models{i});
+        else
+            ypred(i,:) = linclass(X,models{i});
+        end
     end
     ypred = mode(ypred);
      % classify testing data
