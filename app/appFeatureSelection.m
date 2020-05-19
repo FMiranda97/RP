@@ -1,4 +1,4 @@
-function [newData, items] = appFeatureSelection(data, raw, autoSelect, autoSelectMethod, correlation_threshold, checks)
+function [newData, items, indices] = appFeatureSelection(data, raw, autoSelect, autoSelectMethod, correlation_threshold, checks)
     if checks(1), index = 1; else, index = 3; end
     if ~checks(2), index = index + 1; end
     newData = data(index);
@@ -13,4 +13,8 @@ function [newData, items] = appFeatureSelection(data, raw, autoSelect, autoSelec
         newData = autoSelectFeatures(newData, correlation_threshold, autoSelectMethod);
     end
     items = cellstr(newData.label);
+    indices = zeros(size(items));
+    for i = 1:length(indices)
+        indices(i) = find(strcmp([data.label], items{i}),1);
+    end
 end

@@ -3,7 +3,7 @@ function [euclidean_model, error_rate] = Euclidean(data, nClass, training, testi
     ix=randperm(data.num_data);
     ixtr=ix(1:floor(data.num_data*training));
     ixte=ix(floor(data.num_data*testing)+1:end);
-    
+     
     data_tr.X = data.X(:,ixtr);
     data_tr.y = data.y(ixtr);
     data_tr.dim = size(data_tr.X,1);
