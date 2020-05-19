@@ -1,7 +1,7 @@
-function [bayes_model, average_error, standard_dev] = appBayes (app, data, n_runs, training, testing, n_classes)
+function [kmeans_model, average_error, standard_dev] = appKMeans (app, data, n_runs, training, testing, n_classes)
 
     close all
-    %%Bayes classifier
+    %%Kmeans classifier
     
     average_error=zeros(n_runs,1);
     for i = 1:n_runs
@@ -12,7 +12,7 @@ function [bayes_model, average_error, standard_dev] = appBayes (app, data, n_run
     standard_dev = std(average_error);
     average_error = mean(average_error);
     
-    bayes_model=temp_model(1);
+    kmeans_model=temp_model(1);
     
     %plotting 
     app.UIAxes.cla;

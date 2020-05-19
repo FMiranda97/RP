@@ -18,7 +18,7 @@ function [svm_model, average_error, standard_dev] = appSVM (app, data, n_runs, t
     end
     
     %plotting 
-    app.UIAxes.cla
+    app.UIAxes.cla;
     
 %     plot(c_pot, average_err, 'o');
 %     ylabel('Testing Error (%)');

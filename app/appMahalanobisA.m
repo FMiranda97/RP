@@ -16,6 +16,7 @@ function [mahalanobis_model, average_error, standard_dev] = appMahalanobisA (app
     mahalanobis_model.W=temp_model(1).W;
     mahalanobis_model.b=temp_model(1).b;
     mahalanobis_model.mu=temp_model(1).mu;
+    mahalanobis_model.fun=temp_model(1).fun;
     
     for i = 2:n_runs
         mahalanobis_model.W=mahalanobis_model.W+temp_model(i).W;
@@ -28,7 +29,7 @@ function [mahalanobis_model, average_error, standard_dev] = appMahalanobisA (app
     mahalanobis_model.mu=mahalanobis_model.mu/n_runs;
     
     %plot
-    app.UIAxes.cla    
+    app.UIAxes.cla;
     
     if ((size (data.X, 1)>1) &  (data.X(1,:)==real(data.X(1,:))) & (data.X(2,:)==real(data.X(2,:))))
         plot(app.UIAxes,data.X(1,(data.y==2)),data.X(2,(data.y==2)),'o');
