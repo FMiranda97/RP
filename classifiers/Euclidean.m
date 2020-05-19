@@ -39,6 +39,7 @@ function [euclidean_model, error_rate] = Euclidean(data, nClass, training, testi
     
     euclidean_model.W=weights;
     euclidean_model.b=bias;
+    euclidean_model.fun='linclass';
     
 	%TODO error
     ypred = linclass (data_te.X,euclidean_model); % classify testing data

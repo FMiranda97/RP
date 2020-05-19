@@ -14,6 +14,7 @@ function [fisher_model, average_error, standard_dev] = appFisherLDA (app, data, 
     
     fisher_model.W=temp_model(1).W;
     fisher_model.b=temp_model(1).b;
+    fisher_model.fun=temp_model(1).fun;
     
     for i = 2:n_runs
         fisher_model.W=fisher_model.W+temp_model(i).W;
@@ -25,7 +26,7 @@ function [fisher_model, average_error, standard_dev] = appFisherLDA (app, data, 
     
     
     %plotting 
-    app.UIAxes.cla
+    app.UIAxes.cla;
     
     if ((size (data.X, 1)>1) &  (data.X(1,:)==real(data.X(1,:))) & (data.X(2,:)==real(data.X(2,:))))
         plot(app.UIAxes,data.X(1,(data.y==2)),data.X(2,(data.y==2)),'o');
@@ -37,7 +38,7 @@ function [fisher_model, average_error, standard_dev] = appFisherLDA (app, data, 
         %legend(app.UIAxes,'\omega_1','\omega_2')
 
         hold (app.UIAxes,'on')
-        app.UIAxes
+        app.UIAxes;
         %discriminant hyperplane
         %r= fisher_model.W(1:2)'*data.X(1:2,:)+fisher_model.b;
         [x1,y1,x2,y2,~]=clipline(fisher_model.W,fisher_model.b,[min(data.X(1,:)) max(data.X(1,:)) min(data.X(2,:)) max(data.X(2,:))]);

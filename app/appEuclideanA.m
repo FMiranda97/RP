@@ -14,6 +14,7 @@ function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data
     
     euclidean_model.W=temp_model(1).W;
     euclidean_model.b=temp_model(1).b;
+    euclidean_model.fun=temp_model(1).fun;
     
     for i = 2:n_runs
         euclidean_model.W=euclidean_model.W+temp_model(i).W;
@@ -25,7 +26,7 @@ function [euclidean_model, average_error, standard_dev]= appEuclideanA(app, data
     
     
     %plotting
-    app.UIAxes.cla
+    app.UIAxes.cla;
     
     if ((size (data.X, 1)>1) &  (data.X(1,:)==real(data.X(1,:))) & (data.X(2,:)==real(data.X(2,:))))
         plot(app.UIAxes,data.X(1,(data.y==2)),data.X(2,(data.y==2)),'o');

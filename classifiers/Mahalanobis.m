@@ -46,6 +46,7 @@ function [mahalanobis_model, error_rate] = Mahalanobis (data, nClass, training, 
     mahalanobis_model.W=weights;
     mahalanobis_model.b=bias;
     mahalanobis_model.mu=means;
+    mahalanobis_model.fun='linclass';
 
     %TODO error
     ypred = linclass (data_te.X,mahalanobis_model); % classify testing data
