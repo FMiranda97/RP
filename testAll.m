@@ -18,7 +18,7 @@ function testAll(data, n_classes)
             
             %%choose maximum correlation
             for correlation = [0.1 0.5 0.9 1]
-                for method = ["KruskalWallis" "ROC"];
+                for method = ["KruskalWallis" "ROC"]
                     uncorrelatedData = autoSelectFeatures(setData, correlation, method);
                     %%choose reduction technique
                     for redIndex = 1:length(reductionFuncs)
@@ -45,11 +45,11 @@ function testAll(data, n_classes)
                                             average_error(run) = error_rate;
                                         end
                                         %%write results to file
-                                        fprintf(file, "%d,%d,%d,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
-                                        fprintf("%d,%d,%d,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
+                                        fprintf(file, "%d,%d,%d,%s,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, method, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
+                                        fprintf("%d,%d,%d,%s,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, method, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
                                     catch
-                                        fprintf(file, "%d,%d,%d,%s,%f,%s,%f,FAILED,FAILED\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition);
-                                        fprintf("%d,%d,%d,%s,%f,%s,%f,FAILED,FAILED\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition);
+                                        fprintf(file, "%d,%d,%d,%s,%s,%f,%s,%f,FAILED,FAILED\n",i,removeFirst, correlation, method, func2str(redFunc), n, func2str(clasFunc), partition);
+                                        fprintf("%d,%d,%d,%s,%s,%f,%s,%f,FAILED,FAILED\n",i,removeFirst, correlation, method, func2str(redFunc), n, func2str(clasFunc), partition);
                                     end
                                 end
                             end
