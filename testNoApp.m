@@ -26,6 +26,31 @@
           if data_binary(i).y(j) ~= 2, data_binary(i).y(j) = 1; end
        end
     end
+    
+    data_ternary = data;
+    for i = 1:4
+       %set data to ternary problem (scenario B) 
+       %non hand oriented will be set to 1,
+       %general hand oriented will be set to 2,
+       %eating will be set to 3
+       for j = 1:size(data_ternary(i).y)
+          if data_ternary(i).y(j) < 6 || data_ternary(i).y(j) == 13
+              data_ternary(i).y(j) = 1; 
+          elseif data_ternary(i).y(j) < 13 && data_ternary(i).y(j) ~= 6
+              data_ternary(i).y(j) = 3; 
+          else
+              data_ternary(i).y(j) = 2; 
+          end
+       end
+    end    
+    
+    data_C = data;
 
 %%
-testAll(data_binary);
+fprintf("RUNNING SCENARIO A TESTS");
+testAll(data_binary, 2);
+fprintf("RUNNING SCENARIO B TESTS");
+testAll(data_ternary, 3);
+fprintf("RUNNING SCENARIO C TESTS");
+testAll(data_C, 18);
+

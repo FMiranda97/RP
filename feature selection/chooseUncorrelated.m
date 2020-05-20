@@ -1,4 +1,4 @@
-function [selected_features_ix] = chooseUncorrelated(dataScaled,threshold, orderI)
+function [selected_features_ix] = chooseUncorrelated(dataScaled, threshold, orderI)
    C = corr(dataScaled);
    selected_features_ix = [];
    for i = orderI

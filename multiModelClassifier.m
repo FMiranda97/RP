@@ -19,7 +19,7 @@ function [avg_error, std_error] = multiModelClassifier(data, models, checks)
         end
     end
     ypred = mode(ypred);
-     % classify testing data
+    % classify testing data
     avg_error = cerror(ypred,data.y);
     std_error = 0;
 end

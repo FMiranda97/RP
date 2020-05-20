@@ -1,11 +1,9 @@
-function testAll(data)
+function testAll(data, n_classes)
     reductionFuncs = {@ldaReduceFeatures, @pcaReduceFeatures, @pcaReduceFeatures};
-    classifierFuncs = {@fisherLDA, @EuclideanA, @MahalanobisA};
+    classifierFuncs = {@Bayes, @Euclidean, @KMeans, @Mahalanobis};
     
-    if ~exist("tests", 'dir')
-        mkdir("tests")
-    end
-    file = fopen("tests\resultados.txt", 'a');
+    
+    file = fopen(sprintf("resultados%d.txt", n_classes), 'a');
     n_runs = 25;
     
     %%choose data set
@@ -20,38 +18,44 @@ function testAll(data)
             
             %%choose maximum correlation
             for correlation = [0.1 0.5 0.9 1]
-                uncorrelatedData = kwReduceFeatures(setData, correlation);
-                
-                %%choose reduction technique
-                for redIndex = 1:length(reductionFuncs)
-                    redFunc = reductionFuncs{redIndex};
-                    
-                    %%choose reduction parameter
-                    if redIndex == 3, params = [0.95 0.75 0.5];
-                    else params = [2 3 5 10]; end
-                    for n = params
-                        reducedData = redFunc(uncorrelatedData, n);
-                        
-                        %%choose classifier
-                        for clasIndex = 1:length(classifierFuncs)
-                            clasFunc = classifierFuncs{clasIndex};
-                            
-                            %%choose partition
-                            for partition = [0.25 0.5 0.75]
-                                
-                                %%execute runs
-                                average_error=zeros(n_runs,1);
-                                for run = 1:n_runs
-                                    [~, error_rate] = clasFunc(reducedData, partition, 1 - partition);
-                                    average_error(run) = error_rate;
+                for method = ["KruskalWallis" "ROC"];
+                    uncorrelatedData = autoSelectFeatures(setData, correlation, method);
+                    %%choose reduction technique
+                    for redIndex = 1:length(reductionFuncs)
+                        redFunc = reductionFuncs{redIndex};
+
+                        %%choose reduction parameter
+                        if redIndex == 3, params = [0.95 0.75 0.5];
+                        else params = [2 3 5 10]; end
+                        for n = params
+                            reducedData = redFunc(uncorrelatedData, n);
+
+                            %%choose classifier
+                            for clasIndex = 1:length(classifierFuncs)
+                                clasFunc = classifierFuncs{clasIndex};
+
+                                %%choose partition
+                                for partition = [0.5]
+
+                                    %%execute runs
+                                    try
+                                        average_error=zeros(n_runs,1);
+                                        for run = 1:n_runs
+                                            [~, error_rate] = clasFunc(reducedData, n_classes, partition, 1 - partition);
+                                            average_error(run) = error_rate;
+                                        end
+                                        %%write results to file
+                                        fprintf(file, "%d,%d,%d,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
+                                        fprintf("%d,%d,%d,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
+                                    catch
+                                        fprintf(file, "%d,%d,%d,%s,%f,%s,%f,FAILED,FAILED\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition);
+                                        fprintf("%d,%d,%d,%s,%f,%s,%f,FAILED,FAILED\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition);
+                                    end
                                 end
-                                %%write results to file
-                                fprintf(file, "%d,%d,%d,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
-                                fprintf("%d,%d,%d,%s,%f,%s,%f,%f,%f\n",i,removeFirst, correlation, func2str(redFunc), n, func2str(clasFunc), partition, mean(average_error), std(average_error));
                             end
                         end
-                    end
-               end
+                   end
+                end
             end
         end
     end
