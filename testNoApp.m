@@ -50,8 +50,8 @@
 warning ('off','all');
 fprintf("RUNNING SCENARIO A TESTS\n");
 testAll(data_binary, 2);
-% fprintf("RUNNING SCENARIO B TESTS\n");
-% testAll(data_ternary, 3);
-% fprintf("RUNNING SCENARIO C TESTS\n");
-% testAll(data_C, 18);
+fprintf("RUNNING SCENARIO B TESTS\n");
+testAll(data_ternary, 3);
+fprintf("RUNNING SCENARIO C TESTS\n");
+testAll(data_C, 18);
     
