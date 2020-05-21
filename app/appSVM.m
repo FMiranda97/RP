@@ -7,7 +7,7 @@ function [svm_model, average_error, standard_dev] = appSVM (app, data, n_runs, t
 
     %% Model evaluation
 
-    [models, error_rate] = SVM (data, n_classes, training, testing, n_runs);
+    [models, error_rate] = SVM (data, n_classes, training, testing, n_runs,C);
 
     if n_runs > 1
         average_error = mean(error_rate);
@@ -16,10 +16,7 @@ function [svm_model, average_error, standard_dev] = appSVM (app, data, n_runs, t
         average_error = error_rate;
         standard_dev = zeros(1,numel(error_rate));
     end
-    
-    %plotting 
-    app.UIAxes.cla;
-    
+
 %     plot(c_pot, average_error, 'o');
 %     ylabel('Testing Error (%)');
 %     set(gca, 'xtick', c_pot);
@@ -47,9 +44,6 @@ function [svm_model, average_error, standard_dev] = appSVM (app, data, n_runs, t
 
     %[ypred, dfce] = svmclass(data_te.X, svm_model)
     %[FPR, FNR] = roc(dfce, data_te.y);
-    %figure(); plot(FPR,1-FNR);
-    %figure;ppatterns(data_tr); psvm(svm_model, struct('background',1));
-
 end
 
 

@@ -14,6 +14,4 @@ function [kmeans_model, average_error, standard_dev] = appKMeans (app, data, n_r
     
     kmeans_model=temp_model(1);
     
-    %plotting 
-    app.UIAxes.cla;
 end

@@ -14,6 +14,4 @@ function [bayes_model, average_error, standard_dev] = appBayes (app, data, n_run
     
     bayes_model=temp_model(1);
     
-    %plotting 
-    app.UIAxes.cla;
 end

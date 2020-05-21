@@ -3,7 +3,7 @@ function [fisher_model, error_rate] = fisherLDA(data, training, testing)
     %Generate random training and test sets
     ix=randperm(data.num_data);
     ixtr=ix(1:floor(data.num_data*training));
-    ixte=ix(floor(data.num_data*testing)+1:end);
+    ixte=ix(floor(data.num_data*training)+1:end);
     
     data_tr.X = data.X(:,ixtr);
     data_tr.y = data.y(ixtr);
@@ -20,13 +20,5 @@ function [fisher_model, error_rate] = fisherLDA(data, training, testing)
     fisher_model = fld(data_tr); % train FLD classifier
     ypred = linclass (data_te.X,fisher_model);% classify testing data
     error_rate = cerror(ypred,data_te.y); % evaluate testing error
-    
-%     figure; ppatterns(data_tr);
-%     pline(fisher_model);
-%     set(gca,'fontweight','bold','fontsize',14)
-%     xlabel('f1')
-%     ylabel('f2')
-%     title('fisher LDA')
-%     axis ([min(data_tr.X(1,:)) max(data_tr.X(1,:)) min(data_tr.X(2,:)) max(data_tr.X(2,:))])
 
 end

@@ -1,8 +1,4 @@
-function [models, error_rate] = SVM (data, n_classes, training, testing, n_runs)
-    %% SVM parameter tuning
-    c_pot = [-2:1];
-    C=2.^c_pot;
-
+function [models, error_rate] = SVM (data, n_classes, training, testing, n_runs, C)
     %% Model evaluation
     error_rate = zeros(n_runs, numel(C));
     models = cell(n_runs, numel(C));
@@ -10,7 +6,7 @@ function [models, error_rate] = SVM (data, n_classes, training, testing, n_runs)
     for n=1:n_runs
         ix=randperm(data.num_data);
         ixtr=ix(1:floor(data.num_data*training));
-        ixte=ix(floor(data.num_data*testing)+1:end);
+        ixte=ix(floor(data.num_data*training)+1:end);
 
         %training dataset
         data_tr.X = data.X(:,ixtr);
