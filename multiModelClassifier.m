@@ -19,7 +19,7 @@ function [avg_error, std_error] = multiModelClassifier(data, models, checks)
             ypred(j,:) = bayescls(X,models{i});
         elseif models{i}.name == "svm_model"
             ypred(j,:) = svmclass(X,models{i});
-        elseif models{i}.name == "kmeans_model"
+        elseif models{i}.name == "knn_model"
             ypred(j,:) = knnclass(X,models{i});
         else
             ypred(j,:) = linclass(X,models{i});

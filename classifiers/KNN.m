@@ -1,4 +1,4 @@
-function [kmeans_model, error_rate] = KMeans(data, nClass, training, testing)
+function [knn_model, error_rate] = KNN(data, nClass, training, testing)
 
     ix=randperm(data.num_data);
     ixtr=ix(1:floor(data.num_data*training));
@@ -17,10 +17,10 @@ function [kmeans_model, error_rate] = KMeans(data, nClass, training, testing)
     data_te.name = 'Testing set';
 
     % load training data and setup 8-NN rule
-    kmeans_model = knnrule(data_tr, nClass);
+    knn_model = knnrule(data_tr, nClass);
     
     % evaluate classifier
-    ypred = knnclass(data_te.X,kmeans_model);
+    ypred = knnclass(data_te.X,knn_model);
     error_rate=cerror(ypred,data_te.y);
     
 end

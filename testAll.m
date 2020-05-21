@@ -1,6 +1,6 @@
 function testAll(data, n_classes)
     reductionFuncs = {@ldaReduceFeatures, @pcaReduceFeatures, @pcaReduceFeatures};
-    classifierFuncs = {@Bayes, @Euclidean, @KMeans, @Mahalanobis};
+    classifierFuncs = {@Bayes, @Euclidean, @KNN, @Mahalanobis};
     
     
     file = fopen(sprintf("resultados%d.txt", n_classes), 'a');
