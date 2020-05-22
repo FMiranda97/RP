@@ -32,6 +32,25 @@ function [avg_error, std_error] = multiModelClassifier(data, models, checks)
     % classify testing data
     if n_models > 0
         avg_error = cerror(ypred,data.y);
+        if length(unique(ypred)) == 18
+            old = string([11:29]);
+            labels = ["Walking", "Jogging", "Stairs", "Sitting", "Standing", "Typing", "Brushing Teeth", "Eating Soup", "Eating Chips", "Eating Pasta", "Drinking from Cup", "Eating Sandwich", "Kicking", "", "Playing Catch", "Dribbling", "Writing", "Clapping", "Folding Clothes"];
+            ypred = replace(string(ypred+10), old, labels);
+            data.y = replace(string(data.y+10), old, labels);
+        elseif length(unique(ypred)) == 3
+            old = string([1:3]);
+            labels = ["Non - Hand Oriented", "Hand Oriented", "Eating"];
+            ypred = replace(string(ypred), old, labels);
+            data.y = replace(string(data.y), old, labels);
+        elseif length(unique(ypred)) == 2
+            old = string([1:2]);
+            labels = ["Jogging", "Non Jogging"];
+            ypred = replace(string(ypred), old, labels);
+            data.y = replace(string(data.y), old, labels);
+        else
+            return;
+        end
+        c_mat = confusionchart(data.y, ypred, 'Title','Confusion Matrix', 'RowSummary','row-normalized', 'ColumnSummary','column-normalized');
     else
         avg_error = -1;
     end
