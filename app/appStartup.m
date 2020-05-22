@@ -47,10 +47,8 @@ function [data_binary, data_ternary, data_C] = appStartup ()
     data_C = data;
     for i = 1:4
        %remove y gap 13 -> 15
-       for j = 1:size(data_C(i).y)
-            ix = find(data_C(i).y > 14);
-            data_C(i).y(ix) = data_C(i).y(ix) - 1;
-       end
+        ix = find(data_C(i).y > 14);
+        data_C(i).y(ix) = data_C(i).y(ix) - 1;
     end
     clear ix;
 end
