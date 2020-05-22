@@ -22,13 +22,18 @@ function testAll(data, n_classes)
                     uncorrelatedData = autoSelectFeatures(setData, correlation, method);
                     %%choose reduction technique
                     for redIndex = 1:length(reductionFuncs)
-                        redFunc = reductionFuncs{redIndex};
+                        try
+                            redFunc = reductionFuncs{redIndex};
+                        catch
+                            fprintf("FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED");
+                            fprintf(file, "FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED,FAILED");
+                        end
 
                         %%choose reduction parameter
                         if redIndex == 3, params = [0.95 0.75 0.5];
                         else params = [2 3 5 10]; end
                         for n = params
-                            reducedData = redFunc(uncorrelatedData, n);
+                            reducedData = real(redFunc(uncorrelatedData, n));
 
                             %%choose classifier
                             for clasIndex = 1:length(classifierFuncs)
