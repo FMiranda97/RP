@@ -47,7 +47,7 @@
     data_C = data;
 
 %%
-% warning ('off','all');
+warning ('off','all');
 % fprintf("RUNNING SCENARIO A TESTS\n");
 % testAll(data_binary, 2);
 % fprintf("RUNNING SCENARIO B TESTS\n");
